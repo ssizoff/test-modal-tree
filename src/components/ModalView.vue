@@ -7,7 +7,7 @@
                     <button
                         type="button"
                         class="btn-close"
-                        @click="onClose"
+                        @click="() => onClose('close')"
                     ></button>
                 </div>
 
@@ -18,7 +18,7 @@
                 <div class="modal-footer">
                     <button
                         type="button"
-                        @click="() => onClose(true)"
+                        @click="() => onClose('select')"
                         class="btn btn-primary"
                     >
                         Выбрать
@@ -46,9 +46,9 @@ export default {
         this.bsModal.show();
     },
     methods: {
-        onClose(isSelect) {
+        onClose(name) {
             this.$refs.modal.addEventListener('hidden.bs.modal', () =>
-                this.$emit(isSelect ? 'select' : 'close')
+                this.$emit(name)
             );
             this.bsModal.hide();
         },
