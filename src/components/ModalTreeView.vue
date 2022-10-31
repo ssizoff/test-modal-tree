@@ -9,17 +9,16 @@
 </template>
 
 <script>
-import { generateTree } from '../tree';
 import ModalView from './ModalView.vue';
 import TreeView from './TreeView.vue';
 
 export default {
     name: 'ModalTreeView',
     emits: ['close', 'select'],
+    props: ['items'],
     data() {
         return {
             selected: null,
-            items: generateTree(),
         };
     },
     components: { ModalView, TreeView },

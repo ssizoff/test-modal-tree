@@ -1,5 +1,5 @@
 <template>
-    <i :class="iconClass" style="border-color: silver"></i>
+    <i :class="iconClass"></i>
 </template>
 
 <script>
@@ -16,6 +16,7 @@ export default {
                 'btn-outline-secondary',
                 'lh-1',
                 'p-0',
+                'opacity-75'
             ];
         },
     },

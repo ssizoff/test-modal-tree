@@ -1,14 +1,6 @@
 <template>
-    <div
-        ref="modal"
-        class="modal modal-lg"
-        id="myModal"
-        backdrop="static"
-    >
-        <div
-            class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
-            role="document"
-        >
+    <div ref="modal" class="modal modal-lg" id="myModal">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content shadow-lg" style="height: 60vh">
                 <div class="modal-header text-white bg-secondary bg-gradient">
                     <h4 class="modal-title" v-text="title"></h4>
@@ -50,12 +42,14 @@ export default {
         };
     },
     mounted() {
-        this.bsModal = new Modal(this.$refs.modal);
+        this.bsModal = new Modal(this.$refs.modal, { backdrop: 'static' });
         this.bsModal.show();
     },
     methods: {
         onClose(isSelect) {
-            this.$emit(isSelect ? 'select' : 'close');
+            this.$refs.modal.addEventListener('hidden.bs.modal', () =>
+                this.$emit(isSelect ? 'select' : 'close')
+            );
             this.bsModal.hide();
         },
     },

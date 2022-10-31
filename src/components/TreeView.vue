@@ -19,14 +19,12 @@ export default {
     emits: ['select'],
     data() {
         return {
-            title: '',
             activeId: -1,
         };
     },
     components: { TreeNode },
     methods: {
         onSelect(node) {
-            this.title = node.title;
             this.activeId = node.id;
             this.$emit('select', node);
         },

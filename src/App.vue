@@ -2,29 +2,28 @@
     <div class="container mt-4">
         <div class="row">
             <div class="col text-center">
-                <h1>Tree</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col text-center">
                 <div>
                     <input
                         type="button"
                         class="btn btn-primary"
                         @click.prevent="showModal = true"
-                        value="Open"
+                        value="Выбрать..."
                     />
                 </div>
             </div>
         </div>
-        <div v-if="selectedNode" class="row">
-            <div class="col text-center">
-                <div v-text="selectedNode.title"></div>
+        <div
+            v-if="selectedNode"
+            class="row rounded bg-secondary text-white p-4 fs-3 mt-4"
+        >
+            <div class="col">
+                #{{ selectedNode.id }}. {{ selectedNode.title }}
             </div>
         </div>
     </div>
     <ModalTreeView
         v-if="showModal"
+        :items="$store.state.items"
         @close="showModal = false"
         @select="onSelect"
     />
