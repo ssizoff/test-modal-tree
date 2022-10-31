@@ -7,12 +7,13 @@
             @click="expanded = !expanded"
         />
         <i v-else class="bi bi-dot me-2"></i>
-        <span
+        <a
+            href="#"
             v-text="node.title"
             class="p-1 flex-grow-1 rounded"
             :class="{ 'bg-primary': isActive, 'text-white': isActive }"
-            @click="onSelect"
-        ></span>
+            @click.prevent="onSelect"
+        ></a>
     </div>
     <div v-if="expanded" class="ms-2 ps-2 border-start">
         <TreeNode

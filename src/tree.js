@@ -9,7 +9,7 @@ const loremOpt =
 
 export function generateTree(level = 1, id = { value: 0 }) {
     if (level <= 5) {
-        const max = Math.round(Math.random() * 10);
+        const max = level === 1 ? 10 : Math.round(Math.random() * 10);
 
         if (max) {
             const items = [];

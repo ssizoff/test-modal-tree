@@ -43,7 +43,7 @@ export default {
     },
     methods: {
         onSelect(node) {
-            if (node) this.selectedNode = node;
+            this.selectedNode = node;
             this.showModal = false;
         },
     },

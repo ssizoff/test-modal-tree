@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="tree-view">
         <TreeNode
             v-for="i of items"
             :key="i.id"

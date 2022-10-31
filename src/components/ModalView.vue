@@ -1,24 +1,21 @@
 <template>
     <div
-        class="modal modal-lg fade show"
+        ref="modal"
+        class="modal modal-lg"
         id="myModal"
         backdrop="static"
-        style="display: block"
-        tabindex="-1"
-        role="dialog"
-        aria-hidden="true"
     >
         <div
             class="modal-dialog modal-dialog-centered modal-dialog-scrollable"
             role="document"
         >
-            <div class="modal-content" style="height: 60vh">
+            <div class="modal-content shadow-lg" style="height: 60vh">
                 <div class="modal-header text-white bg-secondary bg-gradient">
                     <h4 class="modal-title" v-text="title"></h4>
                     <button
                         type="button"
                         class="btn-close"
-                        @click="$emit('close')"
+                        @click="onClose"
                     ></button>
                 </div>
 
@@ -29,7 +26,7 @@
                 <div class="modal-footer">
                     <button
                         type="button"
-                        @click="$emit('select')"
+                        @click="() => onClose(true)"
                         class="btn btn-primary"
                     >
                         Выбрать
@@ -41,9 +38,26 @@
 </template>
 
 <script>
+import { Modal } from 'bootstrap/dist/js/bootstrap.esm.min.js';
+
 export default {
     name: 'ModalView',
     props: ['title'],
     emits: ['close', 'select'],
+    data() {
+        return {
+            bsModal: null,
+        };
+    },
+    mounted() {
+        this.bsModal = new Modal(this.$refs.modal);
+        this.bsModal.show();
+    },
+    methods: {
+        onClose(isSelect) {
+            this.$emit(isSelect ? 'select' : 'close');
+            this.bsModal.hide();
+        },
+    },
 };
 </script>
