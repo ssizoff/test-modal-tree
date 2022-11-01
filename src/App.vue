@@ -18,10 +18,7 @@
         >
             <div class="col text-center">
                 <span>Выбранный идентификатор:</span>
-                <span
-                    class="badge bg-success ms-4"
-                    v-text="selectedId"
-                ></span>
+                <span class="badge bg-success ms-4" v-text="selectedId"></span>
             </div>
         </div>
     </div>
@@ -30,7 +27,7 @@
         :items="treeItems"
         title="Выберите элемент"
         @close="showModal = false"
-        @select="id => (selectedId = id)"
+        @select="onSelect"
     />
 </template>
 
@@ -45,6 +42,11 @@ export default {
             showModal: false,
             selectedId: null,
         };
+    },
+    methods: {
+        onSelect(id) {
+            this.selectedId = id;
+        },
     },
     computed: {
         ...mapGetters(['treeItems']),
