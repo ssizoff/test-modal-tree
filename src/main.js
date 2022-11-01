@@ -12,6 +12,11 @@ const store = createStore({
             items: generateTree()
         }
     },
+    getters: {
+        treeItems(state) {
+            return state.items;
+        }
+    }
 });
 
 createApp(App).use(store).mount('#app');

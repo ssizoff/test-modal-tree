@@ -5,31 +5,37 @@
                 <div>
                     <input
                         type="button"
-                        class="btn btn-primary"
+                        class="btn btn-lg btn-primary"
                         @click.prevent="showModal = true"
-                        value="Выбрать..."
+                        value="Открыть"
                     />
                 </div>
             </div>
         </div>
         <div
-            v-if="selectedNode"
-            class="row rounded bg-secondary text-white p-4 fs-3 mt-4"
+            v-if="selectedId"
+            class="row rounded bg-secondary bg-opacity-25 p-4 fs-3 mt-4"
         >
-            <div class="col">
-                #{{ selectedNode.id }}. {{ selectedNode.title }}
+            <div class="col text-center">
+                <span>Выбранный идентификатор:</span>
+                <span
+                    class="badge bg-success ms-4"
+                    v-text="selectedId"
+                ></span>
             </div>
         </div>
     </div>
     <ModalTreeView
         v-if="showModal"
-        :items="$store.state.items"
+        :items="treeItems"
+        title="Выберите элемент"
         @close="showModal = false"
-        @select="onSelect"
+        @select="id => (selectedId = id)"
     />
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import ModalTreeView from './components/ModalTreeView.vue';
 
 export default {
@@ -37,14 +43,11 @@ export default {
     data() {
         return {
             showModal: false,
-            selectedNode: null,
+            selectedId: null,
         };
     },
-    methods: {
-        onSelect(node) {
-            this.selectedNode = node;
-            this.showModal = false;
-        },
+    computed: {
+        ...mapGetters(['treeItems']),
     },
     components: { ModalTreeView },
 };
